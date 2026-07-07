@@ -1,1 +1,34 @@
 //page that plays a selected video 
+
+
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
+function VideoPage() {
+  const { id } = useParams();
+  const [video, setVideo] = useState(null);
+
+  useEffect(() => {
+    const fetchVideo = async () => {
+      const res = await axios.get(`http://localhost:5000/api/videos/${id}`);
+      setVideo(res.data);
+    };
+    fetchVideo();
+  }, [id]);
+
+  if (!video) return <p>Loading...</p>;
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <video controls width="100%" src={video.videoUrl}></video>
+      <h2>{video.title}</h2>
+      <p>{video.description}</p>
+    </div>
+  );
+}
+
+export default VideoPage;
+
+
+
