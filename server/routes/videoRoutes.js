@@ -1,7 +1,4 @@
 //list all the url addresses to videos 
-
-
-
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/uploadMiddleware");
