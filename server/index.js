@@ -15,15 +15,7 @@ const app = express();
 
 // Connect to MongoDB
 // Connect to MongoDB
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB Connected");
-  } catch (error) {
-    console.log("MongoDB connection failed:", error);
-    process.exit(1);
-  }
-};
+
 connectDB();
 
 // Allow frontend to talk to backend + understand JSON
