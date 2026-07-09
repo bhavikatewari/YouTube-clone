@@ -1,5 +1,6 @@
 //this file will start the backend server 
-
+import dotenv from "dotenv";
+dotenv.config();
 
 const express = require("express");
 const mongoose = require("mongoose");
