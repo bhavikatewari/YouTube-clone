@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../App";
 import VideoCard from "../components/VideoCard";
 
 function Home() {
@@ -8,14 +9,15 @@ function Home() {
 
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get("http://localhost:5000/api/videos");
+      // Isko ye bana de
+const res = await axios.get(`${API_URL}/api/videos`);
       setVideos(res.data);
     };
     fetchVideos();
   }, []);
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", padding: "20px" }}>
+    <div style={{ display: "flex", flexWrap: "Wrap", padding: "20px" }}>
       {videos.map((video) => (
         <VideoCard key={video._id} video={video} />
       ))}
