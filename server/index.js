@@ -3,42 +3,43 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config(); // .env file load karne ke liye
+require("dotenv").config(); // ye add kiya
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Import Routes
+// Import routes
 const videoRoutes = require("./routes/videoRoutes");
 const userRoutes = require("./routes/userRoutes");
 
-// Middleware
-app.use(cors()); // Frontend ko permission
-app.use(express.json()); // JSON samajhne ke liye
+// Create the server
+const app = express();
 
-// DB Connection
-const connectDB = async () => {
+// Connect to MongoDB
+const connectDB = async () => {  // <-- function banaya
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB Connected Successfully");
+    console.log("MongoDB Connected");
   } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
+    console.log("MongoDB connection failed:", error);
     process.exit(1);
   }
-};
+}; 
 
-connectDB(); // DB ko call karna jaruri hai
+connectDB(); // function ko call kiya
 
-// Test Route
+// Allow frontend to talk to backend + understand JSON
+app.use(cors());
+app.use(express.json());
+
+// Test route
 app.get("/", (req, res) => {
-  res.send("API is running...");
+  res.send("Server is running!");
 });
 
-// Use Routes
+// Use our routes
 app.use("/api/videos", videoRoutes);
 app.use("/api/users", userRoutes);
 
-// Server Start
+// Start server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  console.log(`Server started on port ${PORT}`);
+}); // <-- ye bracket band kiya
