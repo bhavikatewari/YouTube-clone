@@ -1,6 +1,5 @@
 //this file will start the backend server 
-import dotenv from "dotenv";
-dotenv.config();
+
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -21,7 +20,7 @@ app.use(express.json());
 // Connect to MongoDB
 const connectDB = async () => {  // <-- function banaya
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URL);
     console.log("MongoDB Connected");
   } catch (error) {
     console.log("MongoDB connection failed:", error);
