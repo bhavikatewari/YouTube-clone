@@ -13,7 +13,15 @@ const userRoutes = require("./routes/userRoutes");
 // Create the server
 const app = express();
 
-// Connect to MongoDB
+//const connectDB = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB Connected");
+  } catch (error) {
+    console.log("MongoDB connection failed:", error);
+    process.exit(1);
+  }
+}; Connect to MongoDB
 // Connect to MongoDB
 
 connectDB();
