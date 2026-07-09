@@ -1,18 +1,22 @@
 //display one videos title and thumbnail 
 
 import { Link } from "react-router-dom";
+import { API_URL } from "../App";
 
-function Navbar() {
+function VideoCard({ video }) {
   return (
-    <nav style={{ display: "flex", justifyContent: "space-between", padding: "10px 20px", background: "#181818" }}>
-      <Link to="/" style={{ color: "white", fontSize: "20px", textDecoration: "none" }}>
-        🎬 MyTube
-      </Link>
-      <Link to="/login" style={{ color: "white", textDecoration: "none" }}>
-        Login
-      </Link>
-    </nav>
+    <Link to={`/video/${video._id}`} style={{ textDecoration: "none", color: "white" }}>
+      <div style={{ margin: "10px", width: "300px", background: "#181818", padding: "10px", borderRadius: "8px" }}>
+        <img 
+          src={`${API_URL}/${video.thumbnail}`} 
+          alt={video.title} 
+          style={{ width: "100%", borderRadius: "8px" }} 
+        />
+        <h3 style={{ fontSize: "16px", margin: "8px 0 4px" }}>{video.title}</h3>
+        <p style={{ fontSize: "14px", color: "gray" }}>{video.channel}</p>
+      </div>
+    </Link>
   );
 }
 
-export default Navbar;
+export default VideoCard;
